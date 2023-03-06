@@ -1,0 +1,25 @@
+body {
+  &.lock {
+    overflow: hidden;
+    touch-action: none;
+  }
+}
+// Базовые анимации:
+// @import "keyframes";
+
+// Стили для полноэкранного блока:
+// @import "fullscreen";
+
+// Оболочка ===================================================================
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden; // clip - если используется в проекте position: sticky
+}
+.page {
+  position: relative;
+  flex: 1 1 auto;
+  background-color: $bc-color;
+
+}

@@ -1,0 +1,23 @@
+.title {
+	background-color: $blue-color;
+	height: 100%;
+	display: flex;
+  align-items: flex-end;
+  width: 100%;
+  justify-content: end;
+
+	&__signup {
+		font-family: $font-pt;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 49px;
+		line-height: 63px;
+		letter-spacing: 0.5px;
+		white-space: nowrap;
+		color: #ffffff;
+    margin: 0;
+  writing-mode: vertical-rl;
+  transform: scale(-1); 
+  padding: 22px 6px;
+	}
+}
