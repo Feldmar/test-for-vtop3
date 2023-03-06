@@ -1,0 +1,77 @@
+.form {
+	&__description {
+		&__title {
+			font-family: $font-work-sans;
+			font-size: 22px;
+			line-height: 26px;
+			font-weight: 600;
+			letter-spacing: -0.46px;
+			color: #111111;
+		}
+
+		&__subtitle {
+			font-family: $font-work-sans;
+			font-size: 14px;
+			line-height: 16px;
+			color: #111111;
+		}
+	}
+
+	&__container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	&__label {
+		font-family: $font-work-sans;
+		font-size: 12px;
+		line-height: 14px;
+		color: #7c7c7c;
+	}
+
+	&__input {
+		border: unset;
+		border-bottom: 1px solid #f2f2f2;
+		border-radius: unset;
+		width: 234px;
+	}
+
+	&__select {
+		border: unset;
+		border-bottom: 1px solid #f2f2f2;
+		border-radius: unset;
+		width: 234px;
+
+		&__auto {
+			width: auto;
+		}
+	}
+	&__item {
+		height: 42px;
+		display: flex;
+		flex-direction: column;
+		width: auto;
+	}
+
+	&__dob {
+		display: flex;
+		flex-direction: column;
+		width: 234px;
+	}
+
+	&__email {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__gender {
+		display: flex;
+		flex-direction: column;
+		width: 234px;
+
+		&__checks {
+			display: flex;
+		}
+	}
+}
