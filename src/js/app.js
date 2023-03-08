@@ -1,5 +1,4 @@
 
-import { getNationalities, validatePassword } from "./modules";
+import { getNationalities } from "./modules";
 
 getNationalities()
-validatePassword()
