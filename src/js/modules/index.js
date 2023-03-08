@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 let f = document.querySelector("#nationalites");
 
 function getNationalities() {
@@ -37,16 +37,15 @@ function handleInput() {
 		!inputValue.includes("@") ||
 		!inputValue.includes(".")
 	) {
-		this.classList.add("invalid-email");
+		this.classList.add("invalid");
 		console.log("err");
 	} else {
-		this.classList.remove("invalid-email");
+		this.classList.remove("invalid");
 		console.log("noerr");
 	}
 }
 
 emailInput.addEventListener("input", handleInput);
-
 
 const passwordInput = document.getElementById("inputPassword4");
 const confirmPasswordInput = document.getElementById("confirmPasswordInput");
@@ -62,6 +61,7 @@ function validatePassword() {
 	// Check password length
 	if (password.length < 8) {
 		passwordError.innerHTML = "Password must be at least 8 characters long";
+		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
 		return;
 	}
 
@@ -71,12 +71,29 @@ function validatePassword() {
 	if (!hasUpperCase || !hasLowerCase) {
 		passwordError.innerHTML =
 			"Password must have at least one uppercase letter and one lowercase letter";
+		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
+		return;
+	}
+
+	// Check for digits
+	const hasDigit = /[0-9]/.test(password);
+	if (!hasDigit) {
+		passwordError.innerHTML = "Password must have at least one digit";
+		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
 		return;
 	}
 
 	// Check if passwords match
 	if (password !== confirmPassword) {
 		passwordError.innerHTML = "Passwords do not match";
+		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
+		return;
+	}
+
+	// Check maximum password length
+	if (password.length > 50) {
+		passwordError.innerHTML = "Password is too long";
+		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
 		return;
 	}
 
@@ -84,18 +101,38 @@ function validatePassword() {
 	passwordError.innerHTML = "";
 }
 
-const input = document.querySelectorAll("#validate__name");
-const errorDiv = document.getElementById("errorDiv");
-
-function validateInput() {
+function validateInput(input, errorDiv, errorMessage, invalidClass) {
 	const value = input.value;
 	const regex = /^[a-zA-Z0-9]+$/;
 
 	if (!regex.test(value)) {
-		errorDiv.innerHTML = "Only letters and numbers are allowed";
+		errorDiv.innerHTML = errorMessage;
+		input.classList.add(invalidClass); // добавляем класс невалидного инпута
 	} else {
 		errorDiv.innerHTML = "";
+		input.classList.remove(invalidClass); // удаляем класс невалидного инпута
 	}
 }
 
-input.addEventListener("input", validateInput);
+const input = document.querySelector("#validate__name");
+const errorDiv = document.getElementById("errorDiv");
+const input2 = document.querySelector("#validate__name2");
+const errorDiv2 = document.getElementById("errorDiv2");
+
+input.addEventListener("input", () => {
+	validateInput(
+		input,
+		errorDiv,
+		"Only letters and numbers are allowed",
+		"invalid"
+	);
+});
+
+input2.addEventListener("input", () => {
+	validateInput(
+		input2,
+		errorDiv2,
+		"Only letters and numbers are allowed",
+		"invalid"
+	);
+});
