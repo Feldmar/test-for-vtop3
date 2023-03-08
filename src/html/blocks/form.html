@@ -7,101 +7,114 @@
 	</div>
 
 	<form class="form__container needs-validation" novalidate>
-		<div class="form__item">
-			<label for="validationTooltip01" class="form__label">First name</label>
-			<input
-				type="text"
-				class="form__input"
-				id="validationTooltip01"
-				value="Mark"
-				required
-			/>
-			<div class="valid-tooltip">Looks good!</div>
-		</div>
+		<div class="form__top">
+			<div class="form__first-name">
+				<label for="validationTooltip01" class="form__label">First name</label>
+				<input
+					type="text"
+					class="form__input"
+					value="Mark"
+					id="validate__name"
+					required
+				/>
+			</div>
 
-		<div class="form__item">
-			<label for="validationTooltip02" class="form__label">Last name</label>
-			<input
-				type="text"
-				class="form__input"
-				id="validationTooltip02"
-				value="Otto"
-				required
-			/>
-			<div class="valid-tooltip">Looks good!</div>
-		</div>
+			<div class="form__last-name">
+				<label for="validationTooltip02" class="form__label">Last name</label>
+				<input
+					type="text"
+					class="form__input"
+					id="validate__name"
+					value="Otto"
+					required
+				/>
+			</div>
 
-		<div class="form__item">
-			<label for="validationTooltip04" class="form__label">Nationality</label>
-			<select class="form__select" id="nationalites" required></select>
-		</div>
+			<div id="errorDiv"></div>
 
-		<div class="form__email">
-			<label for="inputEmail3" class="form__label">Email</label>
-			<div class="col-sm-10">
-				<input type="email" class="form__input" id="inputEmail3" />
+			<div class="form__nationality">
+				<label for="validationTooltip04" class="form__label">Nationality</label>
+				<select class="form__select" id="nationalites" required></select>
+			</div>
+
+			<div class="form__email">
+				<label for="inputEmail3" class="form__label">Email</label>
+
+				<input type="email" class="email__validate" />
+			</div>
+
+			<div class="form__dob">
+				<label for="validationTooltip04" class="form__label"
+					>Date of Birth</label
+				>
+				<div class="form__dob__selects">
+					<select class="form__select__auto" id="validationTooltip04" required>
+						<option selected disabled value="">21</option>
+						<option>...</option>
+					</select>
+					<select class="form__select__auto" id="validationTooltip04" required>
+						<option selected disabled value="">December</option>
+						<option>...</option>
+					</select>
+					<select class="form__select__auto" id="validationTooltip04" required>
+						<option selected disabled value="">1995</option>
+						<option>...</option>
+					</select>
+					<div class="invalid-tooltip">Please select a valid state.</div>
+				</div>
+			</div>
+
+			<div class="form__gender">
+				<label for="validationTooltip02" class="form__label">Gender</label>
+				<div class="form__gender__checks">
+					<div class="form__check">
+						<input
+							class="form__check__input"
+							type="radio"
+							name="exampleRadios"
+							id="exampleRadios1"
+							value="option1"
+							checked
+						/>
+						<label class="form__check__label" for="exampleRadios1">
+							Male
+						</label>
+					</div>
+					<div class="form__check">
+						<input
+							class="form__check__input"
+							type="radio"
+							name="exampleRadios"
+							id="exampleRadios2"
+							value="option2"
+						/>
+						<label class="form__check__label" for="exampleRadios2">
+							Female
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form__password">
+				<label for="inputPassword4" class="form__label">Password</label>
+				<input type="password" class="form__input" id="inputPassword4" />
+				<div id="password-error"></div>
+			</div>
+			<div class="form__password">
+				<label for="inputPassword4" class="form__label">
+					Confirm Password</label
+				>
+				<input type="password" class="form__input" id="confirmPasswordInput" />
 			</div>
 		</div>
-
-		<div class="form__dob">
-			<label for="validationTooltip04" class="form__label">Date of Birth</label>
+		<div class="form__bottom">
 			<div>
-				<select class="form__select__auto" id="validationTooltip04" required>
-					<option selected disabled value="">21</option>
-					<option>...</option>
-				</select>
-				<select class="form__select__auto" id="validationTooltip04" required>
-					<option selected disabled value="">December</option>
-					<option>...</option>
-				</select>
-				<select class="form__select__auto" id="validationTooltip04" required>
-					<option selected disabled value="">1995</option>
-					<option>...</option>
-				</select>
-				<div class="invalid-tooltip">Please select a valid state.</div>
+				<span class="form__bottom__description"
+					>Have an account? <a href="#" class="form__login">Login</a></span
+				>
 			</div>
-		</div>
-
-		<div class="form__gender">
-			<label for="validationTooltip02" class="form__label">Gender</label>
-			<div class="form__gender__checks">
-				<div class="form-check">
-					<input
-						class="form-check-input"
-						type="radio"
-						name="exampleRadios"
-						id="exampleRadios1"
-						value="option1"
-						checked
-					/>
-					<label class="form-check-label" for="exampleRadios1"> Male </label>
-				</div>
-				<div class="form-check">
-					<input
-						class="form-check-input"
-						type="radio"
-						name="exampleRadios"
-						id="exampleRadios2"
-						value="option2"
-					/>
-					<label class="form-check-label" for="exampleRadios2"> Female </label>
-				</div>
+			<div>
+				<button class="form__button" type="submit">Complete Signup</button>
 			</div>
-		</div>
-		<div class="form__item">
-			<label for="inputPassword4" class="form__label">Password</label>
-			<input type="password" class="form__input" id="inputPassword4" />
-		</div>
-		<div class="form__item">
-			<label for="inputPassword4" class="form__label"> Confirm Password</label>
-			<input type="password" class="form__input" id="inputPassword4" />
-		</div>
-
-		<div>
-			<span>Have an account? <a>Login</a></span>
-		</div>
-		<div class="col-12">
-			<button class="btn btn-primary" type="submit">Submit form</button>
 		</div>
 	</form>
 </div>

@@ -2,9 +2,13 @@
 	background-color: $blue-color;
 	height: 100%;
 	display: flex;
-  align-items: flex-end;
-  width: 100%;
-  justify-content: end;
+	align-items: flex-end;
+	width: 100%;
+	justify-content: end;
+
+	@media (max-width: 750px) {
+		align-items: start;
+	}
 
 	&__signup {
 		font-family: $font-pt;
@@ -15,9 +19,9 @@
 		letter-spacing: 0.5px;
 		white-space: nowrap;
 		color: #ffffff;
-    margin: 0;
+		margin: 0;
 		writing-mode: vertical-rl;
-		transform: scale(-1); 
+		transform: scale(-1);
 		padding: 22px 6px;
 	}
 }

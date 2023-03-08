@@ -1,10 +1,39 @@
-.registration{
-  width: 665px;
-  height: 481px;
-  background-color: #fff;
-  display: flex;
-  
-  &__title{
-    min-width: 137px;
-  }
+.registration {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	@media (max-width: 750px) {
+		align-items: unset;
+	}
+	
+	&__form {
+		width: 100%;
+		height: 100%;
+
+		@media (max-width: 750px) {
+			width: 80%;
+		}
+	}
+
+	&__title {
+		min-width: 137px;
+		@media (max-width: 750px) {
+			min-width: 20%;
+		}
+	}
+
+	&__container {
+		width: 665px;
+		height: 481px;
+		background-color: #fff;
+		display: flex;
+
+		@media (max-width: 750px) {
+			width: 100%;
+			height: 100%;
+		}
+	}
 }

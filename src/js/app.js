@@ -1,6 +1,7 @@
 
 import {
-  getNationalities
+  getNationalities,
+  handleInput
 } from './modules'
 
 getNationalities()
