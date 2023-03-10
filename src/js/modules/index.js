@@ -1,7 +1,7 @@
 "use strict";
 let f = document.querySelector("#nationalites");
 
-function getNationalities() {
+function getNationalities() { //национальности для селекта
 	const nationalities = [
 		"American",
 		"British",
@@ -27,7 +27,7 @@ function getNationalities() {
 
 const day = document.querySelector(".day");
 
-function getDay() {
+function getDay() { //день для селекта
 	const dayOptions = [];
 
 	for (let i = 1; i <= 31; i++) {
@@ -39,7 +39,7 @@ function getDay() {
 
 let mounth = document.querySelector(".mounth");
 
-function getMounth() {
+function getMounth() { //месяц для селекта
 	const mounths = [
 		"January",
 		"February",
@@ -64,7 +64,7 @@ function getMounth() {
 
 const year = document.querySelector(".year");
 
-function getYear() {
+function getYear() { //год для селекта
 	const yearOptions = [];
 
 	let today = new Date();
@@ -77,7 +77,7 @@ function getYear() {
 	year.innerHTML = yearOptions.join("");
 }
 
-export { getNationalities, getDay, getMounth, getYear };
+export { getNationalities, getDay, getMounth, getYear }; //экспортируем
 
 const emailInput = document.querySelector(".email__validate");
 
@@ -86,8 +86,8 @@ function handleInput() {
 
 	if (
 		/[^\u0000-\u007F]/.test(inputValue) ||
-		!inputValue.includes("@") ||
-		!inputValue.includes(".")
+		!inputValue.includes("@") || //проверка на наличие собачки
+		!inputValue.includes(".") //проверка на наличие точки
 	) {
 		this.classList.add("invalid");
 		console.log("err");
@@ -110,14 +110,14 @@ function validatePassword() {
 	const password = passwordInput.value;
 	const confirmPassword = confirmPasswordInput.value;
 
-	// Check password length
+	// проверка на количество знаков больше 8
 	if (password.length < 8) {
 		passwordError.innerHTML = "Password must be at least 8 characters long";
 		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
 		return;
 	}
 
-	// Check for uppercase and lowercase letters
+	// проверка на наличие больших и маленьких букв
 	const hasUpperCase = /[A-Z]/.test(password);
 	const hasLowerCase = /[a-z]/.test(password);
 	if (!hasUpperCase || !hasLowerCase) {
@@ -127,7 +127,7 @@ function validatePassword() {
 		return;
 	}
 
-	// Check for digits
+	// проверка на наличие чисел
 	const hasDigit = /[0-9]/.test(password);
 	if (!hasDigit) {
 		passwordError.innerHTML = "Password must have at least one digit";
@@ -135,21 +135,21 @@ function validatePassword() {
 		return;
 	}
 
-	// Check if passwords match
+	// сверяем пароль и повтор пароля
 	if (password !== confirmPassword) {
 		passwordError.innerHTML = "Passwords do not match";
 		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
 		return;
 	}
 
-	// Check maximum password length
-	if (password.length > 50) {
+	// ограничиваем длинну пароля
+	if (password.length > 30) {
 		passwordError.innerHTML = "Password is too long";
 		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
 		return;
 	}
 
-	// Clear error message if everything is valid
+	// убираем сообщение если все правильно
 	passwordError.innerHTML = "";
 }
 
@@ -171,7 +171,7 @@ const errorDiv = document.getElementById("errorDiv");
 const input2 = document.querySelector("#validate__name2");
 const errorDiv2 = document.getElementById("errorDiv2");
 
-input.addEventListener("input", () => {
+input.addEventListener("input", () => { //валидация имени
 	validateInput(
 		input,
 		errorDiv,
@@ -180,7 +180,7 @@ input.addEventListener("input", () => {
 	);
 });
 
-input2.addEventListener("input", () => {
+input2.addEventListener("input", () => { //валидация фамилии
 	validateInput(
 		input2,
 		errorDiv2,
@@ -189,14 +189,17 @@ input2.addEventListener("input", () => {
 	);
 });
 
-var submitButton = document.querySelector(".form__button");
+const submitButton = document.querySelector(".form__button");
+let xhr = new XMLHttpRequest();
+
 // добавляем обработчик события нажатия на кнопку
 submitButton.addEventListener("click", function (event) {
-	// отменяем стандартное поведение браузера при отправке формы
-	event.preventDefault();
+	event.preventDefault(); // отменяем стандартное поведение браузера при отправке формы
+	sendFormData(); // отправляем данные формы на сервер
+});
 
-	// собираем данные формы
-	var formData = {
+function sendFormData() {
+	const formData = { //собираем значения формы
 		firstName: document.querySelector("#validate__name").value,
 		lastName: document.querySelector("#validate__name2").value,
 		nationality: document.querySelector("#nationalites").value,
@@ -208,36 +211,26 @@ submitButton.addEventListener("click", function (event) {
 		confirmPassword: document.querySelector("#confirmPasswordInput").value,
 	};
 
-	var xhr = new XMLHttpRequest();
-
-	xhr.open("GET", "json/server-ok.json", true);
-
+	xhr.open("GET", "json/server-ok.json", true); //адрес положительного запроса
 	xhr.send(formData);
-
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState != 4) return;
-
-
-		if (xhr.status != 200) {
-			// обработать ошибку
-			alert(xhr.status + ": " + xhr.statusText);
-		} else {
-			try {
-				var phones = JSON.parse(xhr.responseText);
-			} catch (e) {
-				alert("Некорректный ответ " + e.message);
-			}
-			showPhones(phones);
-		}
-	};
-
-
-
-function showPhones(phones) {
-	
-
-		alert(phones.result)
-
 }
 
-});
+function showResult(res) {
+	alert(res.result); //функция для отображения
+}
+
+function handleResponse() {
+	if (xhr.readyState != 4) return;
+
+	if (xhr.status != 200) {
+		xhr.open("GET", "json/server-err.json", true); //адрес отрицательного запроса
+		xhr.send(null);
+		let result = JSON.parse(xhr.responseText);
+		showResult(result);
+	} else {
+		let result = JSON.parse(xhr.responseText);
+		showResult(result);
+	}
+}
+
+xhr.onreadystatechange = handleResponse;
