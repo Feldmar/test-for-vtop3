@@ -6,7 +6,7 @@
 		</div>
 	</div>
 
-	<form class="form__container needs-validation" novalidate>
+	<form class="form__container needs-validation"  method="post" enctype="multipart/form-data" novalidate>
 		<div class="form__top">
 			<div class="form__first-name">
 				<label for="validationTooltip01" class="form__label">First name</label>
@@ -48,18 +48,9 @@
 					>Date of Birth</label
 				>
 				<div class="form__dob__selects">
-					<select class="form__select__auto" id="validationTooltip04" required>
-						<option selected disabled value="">21</option>
-						<option>...</option>
-					</select>
-					<select class="form__select__auto" id="validationTooltip04" required>
-						<option selected disabled value="">December</option>
-						<option>...</option>
-					</select>
-					<select class="form__select__auto" id="validationTooltip04" required>
-						<option selected disabled value="">1995</option>
-						<option>...</option>
-					</select>
+					<select class="form__select__auto day" required></select>
+					<select class="form__select__auto mounth" required></select>
+					<select class="form__select__auto year" required></select>
 					<div class="invalid-tooltip">Please select a valid state.</div>
 				</div>
 			</div>
@@ -72,8 +63,7 @@
 							class="form__check__input"
 							type="radio"
 							name="exampleRadios"
-							id="exampleRadios1"
-							value="option1"
+							value="male"
 							checked
 						/>
 						<label class="form__check__label" for="exampleRadios1">
@@ -85,8 +75,7 @@
 							class="form__check__input"
 							type="radio"
 							name="exampleRadios"
-							id="exampleRadios2"
-							value="option2"
+							value="female"
 						/>
 						<label class="form__check__label" for="exampleRadios2">
 							Female

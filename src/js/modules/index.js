@@ -25,7 +25,59 @@ function getNationalities() {
 	f.innerHTML = nationalitiesOptions.join("");
 }
 
-export { getNationalities };
+const day = document.querySelector(".day");
+
+function getDay() {
+	const dayOptions = [];
+
+	for (let i = 1; i <= 31; i++) {
+		dayOptions.push(`<option class="day__option" value=${i}>${i}</option>`);
+	}
+
+	day.innerHTML = dayOptions.join("");
+}
+
+let mounth = document.querySelector(".mounth");
+
+function getMounth() {
+	const mounths = [
+		"January",
+		"February",
+		"March",
+		"April",
+		"May",
+		"June",
+		"July",
+		"August",
+		"September",
+		"October",
+		"November",
+		"December",
+	];
+
+	const mounthsOptions = mounths.map((mounths) => {
+		return `<option  class="mounths__option" value=${mounths}>${mounths}</option>`;
+	});
+
+	mounth.innerHTML = mounthsOptions.join("");
+}
+
+const year = document.querySelector(".year");
+
+function getYear() {
+	const yearOptions = [];
+
+	let today = new Date();
+	let fillYear = today.getFullYear();
+
+	for (let i = fillYear; i >= 1920; i--) {
+		yearOptions.push(`<option class="year__option" value=${i}>${i}</option>`);
+	}
+
+	year.innerHTML = yearOptions.join("");
+}
+
+export { getNationalities, getDay, getMounth, getYear };
 
 const emailInput = document.querySelector(".email__validate");
 
@@ -135,4 +187,57 @@ input2.addEventListener("input", () => {
 		"Only letters and numbers are allowed",
 		"invalid"
 	);
+});
+
+var submitButton = document.querySelector(".form__button");
+// добавляем обработчик события нажатия на кнопку
+submitButton.addEventListener("click", function (event) {
+	// отменяем стандартное поведение браузера при отправке формы
+	event.preventDefault();
+
+	// собираем данные формы
+	var formData = {
+		firstName: document.querySelector("#validate__name").value,
+		lastName: document.querySelector("#validate__name2").value,
+		nationality: document.querySelector("#nationalites").value,
+		email: document.querySelector(".email__validate").value,
+		day: document.querySelector(".day").value,
+		mounth: document.querySelector(".mounth").value,
+		year: document.querySelector(".year").value,
+		gender: document.querySelector('input[name="exampleRadios"]:checked').value,
+		confirmPassword: document.querySelector("#confirmPasswordInput").value,
+	};
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open("GET", "json/server-ok.json", true);
+
+	xhr.send(formData);
+
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState != 4) return;
+
+
+		if (xhr.status != 200) {
+			// обработать ошибку
+			alert(xhr.status + ": " + xhr.statusText);
+		} else {
+			try {
+				var phones = JSON.parse(xhr.responseText);
+			} catch (e) {
+				alert("Некорректный ответ " + e.message);
+			}
+			showPhones(phones);
+		}
+	};
+
+
+
+function showPhones(phones) {
+	
+
+		alert(phones.result)
+
+}
+
 });
