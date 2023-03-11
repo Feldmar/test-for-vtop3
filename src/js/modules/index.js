@@ -1,7 +1,8 @@
 "use strict";
 let f = document.querySelector("#nationalites");
 
-function getNationalities() { //национальности для селекта
+function getNationalities() {
+	//национальности для селекта
 	const nationalities = [
 		"American",
 		"British",
@@ -27,7 +28,8 @@ function getNationalities() { //национальности для селект
 
 const day = document.querySelector(".day");
 
-function getDay() { //день для селекта
+function getDay() {
+	//день для селекта
 	const dayOptions = [];
 
 	for (let i = 1; i <= 31; i++) {
@@ -39,7 +41,8 @@ function getDay() { //день для селекта
 
 let mounth = document.querySelector(".mounth");
 
-function getMounth() { //месяц для селекта
+function getMounth() {
+	//месяц для селекта
 	const mounths = [
 		"January",
 		"February",
@@ -64,7 +67,8 @@ function getMounth() { //месяц для селекта
 
 const year = document.querySelector(".year");
 
-function getYear() { //год для селекта
+function getYear() {
+	//год для селекта
 	const yearOptions = [];
 
 	let today = new Date();
@@ -80,6 +84,7 @@ function getYear() { //год для селекта
 export { getNationalities, getDay, getMounth, getYear }; //экспортируем
 
 const emailInput = document.querySelector(".email__validate");
+const submitButton = document.querySelector(".form__button");
 
 function handleInput() {
 	const inputValue = this.value.trim();
@@ -94,6 +99,13 @@ function handleInput() {
 	} else {
 		this.classList.remove("invalid");
 		console.log("noerr");
+	}
+
+	// check if any input field has the invalid class
+	if (document.querySelector(".invalid")) {
+		submitButton.disabled = true;
+	} else {
+		submitButton.disabled = false;
 	}
 }
 
@@ -113,7 +125,9 @@ function validatePassword() {
 	// проверка на количество знаков больше 8
 	if (password.length < 8) {
 		passwordError.innerHTML = "Password must be at least 8 characters long";
-		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
+		passwordInput.classList.add("invalid");
+		submitButton.disabled = true;
+		cancelSend(); // добавляем класс невалидного инпута
 		return;
 	}
 
@@ -123,7 +137,8 @@ function validatePassword() {
 	if (!hasUpperCase || !hasLowerCase) {
 		passwordError.innerHTML =
 			"Password must have at least one uppercase letter and one lowercase letter";
-		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
+		passwordInput.classList.add("invalid");
+		submitButton.disabled = true; // добавляем класс невалидного инпута
 		return;
 	}
 
@@ -131,26 +146,30 @@ function validatePassword() {
 	const hasDigit = /[0-9]/.test(password);
 	if (!hasDigit) {
 		passwordError.innerHTML = "Password must have at least one digit";
-		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
+		passwordInput.classList.add("invalid");
+		submitButton.disabled = true; // добавляем класс невалидного инпута
 		return;
 	}
 
 	// сверяем пароль и повтор пароля
 	if (password !== confirmPassword) {
 		passwordError.innerHTML = "Passwords do not match";
-		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
+		passwordInput.classList.add("invalid");
+		submitButton.disabled = true; // добавляем класс невалидного инпута
 		return;
 	}
 
 	// ограничиваем длинну пароля
 	if (password.length > 30) {
 		passwordError.innerHTML = "Password is too long";
-		passwordInput.classList.add("invalid"); // добавляем класс невалидного инпута
+		passwordInput.classList.add("invalid");
+		submitButton.disabled = true; // добавляем класс невалидного инпута
 		return;
 	}
 
 	// убираем сообщение если все правильно
 	passwordError.innerHTML = "";
+	submitButton.disabled = false;
 }
 
 function validateInput(input, errorDiv, errorMessage, invalidClass) {
@@ -159,10 +178,12 @@ function validateInput(input, errorDiv, errorMessage, invalidClass) {
 
 	if (!regex.test(value)) {
 		errorDiv.innerHTML = errorMessage;
-		input.classList.add(invalidClass); // добавляем класс невалидного инпута
+		input.classList.add(invalidClass);
+		submitButton.disabled = true; // добавляем класс невалидного инпута
 	} else {
 		errorDiv.innerHTML = "";
-		input.classList.remove(invalidClass); // удаляем класс невалидного инпута
+		input.classList.remove(invalidClass);
+		submitButton.disabled = false; // удаляем класс невалидного инпута
 	}
 }
 
@@ -171,7 +192,8 @@ const errorDiv = document.getElementById("errorDiv");
 const input2 = document.querySelector("#validate__name2");
 const errorDiv2 = document.getElementById("errorDiv2");
 
-input.addEventListener("input", () => { //валидация имени
+input.addEventListener("input", () => {
+	//валидация имени
 	validateInput(
 		input,
 		errorDiv,
@@ -180,7 +202,8 @@ input.addEventListener("input", () => { //валидация имени
 	);
 });
 
-input2.addEventListener("input", () => { //валидация фамилии
+input2.addEventListener("input", () => {
+	//валидация фамилии
 	validateInput(
 		input2,
 		errorDiv2,
@@ -189,7 +212,6 @@ input2.addEventListener("input", () => { //валидация фамилии
 	);
 });
 
-const submitButton = document.querySelector(".form__button");
 let xhr = new XMLHttpRequest();
 
 // добавляем обработчик события нажатия на кнопку
@@ -199,7 +221,8 @@ submitButton.addEventListener("click", function (event) {
 });
 
 function sendFormData() {
-	const formData = { //собираем значения формы
+	const formData = {
+		//собираем значения формы
 		firstName: document.querySelector("#validate__name").value,
 		lastName: document.querySelector("#validate__name2").value,
 		nationality: document.querySelector("#nationalites").value,
@@ -216,7 +239,11 @@ function sendFormData() {
 }
 
 function showResult(res) {
-	alert(res.result); //функция для отображения
+	if (res.result === "err") {
+		animateError();
+	} else {
+		alert(res.result);
+	}
 }
 
 function handleResponse() {
@@ -226,11 +253,35 @@ function handleResponse() {
 		xhr.open("GET", "json/server-err.json", true); //адрес отрицательного запроса
 		xhr.send(null);
 		let result = JSON.parse(xhr.responseText);
-		showResult(result);
+		// showResult(result);
 	} else {
 		let result = JSON.parse(xhr.responseText);
 		showResult(result);
 	}
 }
 
+function animateError() {
+	submitButton.animate(
+		[
+			// keyframes
+			{ transform: "translateX(-10px)" },
+			{ transform: "translateX(0)" },
+			{ transform: "translateX(10px)" },
+			{ transform: "translateX(0)" },
+			{ transform: "translateX(-10px)" },
+			{ transform: "translateX(0)" },
+			{ transform: "translateX(10px)" },
+			{ transform: "translateX(0)" },
+			{ transform: "translateX(-10px)" },
+			{ transform: "translateX(0)" },
+			{ transform: "translateX(10px)" },
+			{ transform: "translateX(0)" },
+		],
+		{
+			// timing options
+			duration: 700,
+			iterations: 1,
+		}
+	);
+}
 xhr.onreadystatechange = handleResponse;
