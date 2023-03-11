@@ -1,16 +1,16 @@
 "use strict";
 let nationality = document.querySelector("#nationalites");
 let emailInvalid = document.querySelector(".invalid__email");
-const input = document.querySelector("#validate__name");
-const errorDiv = document.querySelector("#name_invalid");
-const input2 = document.querySelector("#last-name_invalid");
-const errorDiv2 = document.querySelector("#errorDiv2");
+const inputName = document.querySelector("#validate__name");
+const invalidName = document.querySelector("#name_invalid");
+const inputLastName = document.querySelector("#validate__last-name");
+const invalidLastName = document.querySelector("#last-name_invalid");
 const day = document.querySelector(".day");
 let mounth = document.querySelector(".mounth");
 const year = document.querySelector(".year");
 const emailInput = document.querySelector(".email__validate");
 const submitButton = document.querySelector(".form__button");
-const passwordInput = document.querySelector("#inputPassword4");
+const passwordInput = document.querySelector("#inputPassword");
 const confirmPasswordInput = document.querySelector("#confirmPasswordInput");
 const passwordError = document.querySelector("#password-error");
 
@@ -191,21 +191,21 @@ function handleNames(input, errorDiv, errorMessage, invalidClass) {
 	}
 }
 
-input.addEventListener("input", () => {
+inputName.addEventListener("input", () => {
 	//валидация имени
 	handleNames(
-		input,
-		errorDiv,
+		inputName,
+		invalidName,
 		"Only letters and numbers are allowed",
 		"invalid"
 	);
 });
 
-input2.addEventListener("input", () => {
+inputLastName.addEventListener("input", () => {
 	//валидация фамилии
 	handleNames(
-		input2,
-		errorDiv2,
+		inputLastName,
+		invalidLastName,
 		"Only letters and numbers are allowed",
 		"invalid"
 	);
@@ -223,7 +223,7 @@ function sendFormData() {
 	const formData = {
 		//собираем значения формы
 		firstName: document.querySelector("#validate__name").value,
-		lastName: document.querySelector("#last-name_invalid").value,
+		lastName: document.querySelector("#validate__last-name").value,
 		nationality: document.querySelector("#nationalites").value,
 		email: document.querySelector(".email__validate").value,
 		day: document.querySelector(".day").value,
@@ -244,7 +244,7 @@ function showResult(res) {
 		alert(res.result);
 
 		document.querySelector("#validate__name").value = "";
-		document.querySelector("#last-name_invalid").value = "";
+		document.querySelector("#validate__last-name").value = "";
 		document.querySelector("#nationalites").value = "";
 		document.querySelector(".email__validate").value = "";
 		document.querySelector(".day").value = "1";
