@@ -6,10 +6,15 @@
 		</div>
 	</div>
 
-	<form class="form__container needs-validation"  method="post" enctype="multipart/form-data" novalidate>
+	<form
+		class="form__container"
+		method="get"
+		enctype="multipart/form-data"
+		novalidate
+	>
 		<div class="form__top">
 			<div class="form__first-name">
-				<label for="validationTooltip01" class="form__label">First name</label>
+				<label class="form__label">First name</label>
 				<input
 					type="text"
 					class="form__input"
@@ -21,7 +26,7 @@
 			</div>
 
 			<div class="form__last-name">
-				<label for="validationTooltip02" class="form__label">Last name</label>
+				<label class="form__label">Last name</label>
 				<input
 					type="text"
 					class="form__input"
@@ -33,30 +38,28 @@
 			</div>
 
 			<div class="form__nationality">
-				<label for="validationTooltip04" class="form__label">Nationality</label>
+				<label class="form__label">Nationality</label>
 				<select class="form__select" id="nationalites" required></select>
 			</div>
 
 			<div class="form__email">
-				<label for="inputEmail3" class="form__label">Email</label>
+				<label class="form__label">Email</label>
 
-				<input type="email" class="email__validate" value=""/>
+				<input type="email" class="email__validate" value="" />
+				<label class="invalid__email"></label>
 			</div>
 
 			<div class="form__dob">
-				<label for="validationTooltip04" class="form__label"
-					>Date of Birth</label
-				>
+				<label class="form__label">Date of Birth</label>
 				<div class="form__dob__selects">
-					<select class="form__select__auto day" required></select>
-					<select class="form__select__auto mounth" required></select>
-					<select class="form__select__auto year" required></select>
-					<div class="invalid-tooltip">Please select a valid state.</div>
+					<select class="form__select day" required></select>
+					<select class="form__select mounth" required></select>
+					<select class="form__select year" required></select>
 				</div>
 			</div>
 
 			<div class="form__gender">
-				<label for="validationTooltip02" class="form__label">Gender</label>
+				<label class="form__label">Gender</label>
 				<div class="form__gender__checks">
 					<div class="form__check">
 						<input
@@ -66,9 +69,7 @@
 							value="male"
 							checked
 						/>
-						<label class="form__check__label" for="exampleRadios1">
-							Male
-						</label>
+						<label class="form__check__label"> Male </label>
 					</div>
 					<div class="form__check">
 						<input
@@ -77,22 +78,28 @@
 							name="exampleRadios"
 							value="female"
 						/>
-						<label class="form__check__label" for="exampleRadios2">
-							Female
-						</label>
+						<label class="form__check__label"> Female </label>
 					</div>
 				</div>
 			</div>
 			<div class="form__password">
-				<label for="inputPassword4" class="form__label">Password</label>
-				<input type="password" class="form__input" id="inputPassword4" value="" />
+				<label class="form__label">Password</label>
+				<input
+					type="password"
+					class="form__input"
+					id="inputPassword4"
+					value=""
+				/>
 				<label id="password-error"></label>
 			</div>
 			<div class="form__password">
-				<label for="inputPassword4" class="form__label">
-					Confirm Password</label
-				>
-				<input type="password" class="form__input" id="confirmPasswordInput" value=""/>
+				<label class="form__label"> Confirm Password</label>
+				<input
+					type="password"
+					class="form__input"
+					id="confirmPasswordInput"
+					value=""
+				/>
 			</div>
 		</div>
 

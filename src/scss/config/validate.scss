@@ -1,0 +1,32 @@
+.email__validate {
+	border: unset;
+	border-bottom: 1px solid #f2f2f2;
+	border-radius: unset;
+	width: 234px;
+	font-family: $font-work-sans;
+	font-size: 14px;
+	line-height: 16px;
+	color: #111111;
+	padding-bottom: 6px;
+	background: transparent;
+}
+
+.invalid {
+	border-bottom: 1px solid red !important;
+	color: red !important;
+}
+
+.valid {
+	background-image: url("../../images/Shape-ok.svg") !important;
+	background-position: right 2px;
+	background-repeat: no-repeat !important;
+}
+
+#errorDiv,
+#errorDiv2,
+#password-error,
+.invalid__email {
+	font-size: 12px;
+	color: red;
+	max-width: 234px;
+}

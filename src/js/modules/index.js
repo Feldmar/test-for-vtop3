@@ -1,5 +1,10 @@
 "use strict";
 let f = document.querySelector("#nationalites");
+let emailInvalid = document.querySelector(".invalid__email");
+const input = document.querySelector("#validate__name");
+const errorDiv = document.getElementById("errorDiv");
+const input2 = document.querySelector("#validate__name2");
+const errorDiv2 = document.getElementById("errorDiv2");
 
 function getNationalities() {
 	//национальности для селекта
@@ -96,9 +101,12 @@ function handleInput() {
 	) {
 		this.classList.add("invalid");
 		this.classList.remove("valid");
+		emailInvalid.innerHTML =
+			"Email only include: latin letters, numbers, at, dot, and underscores";
 	} else {
 		this.classList.remove("invalid");
 		this.classList.add("valid");
+		emailInvalid.innerHTML = "";
 	}
 
 	// check if any input field has the invalid class
@@ -106,8 +114,6 @@ function handleInput() {
 		submitButton.disabled = true;
 	} else {
 		submitButton.disabled = false;
-
-
 	}
 }
 
@@ -175,11 +181,6 @@ function validatePassword() {
 	passwordInput.classList.remove("invalid");
 }
 
-
-
-
-
-
 function validateInput(input, errorDiv, errorMessage, invalidClass) {
 	const value = input.value;
 	const regex = /^[a-zA-Z0-9]+$/;
@@ -194,11 +195,6 @@ function validateInput(input, errorDiv, errorMessage, invalidClass) {
 		submitButton.disabled = false; // удаляем класс невалидного инпута
 	}
 }
-
-const input = document.querySelector("#validate__name");
-const errorDiv = document.getElementById("errorDiv");
-const input2 = document.querySelector("#validate__name2");
-const errorDiv2 = document.getElementById("errorDiv2");
 
 input.addEventListener("input", () => {
 	//валидация имени
@@ -251,6 +247,16 @@ function showResult(res) {
 		animateError();
 	} else {
 		alert(res.result);
+
+		document.querySelector("#validate__name").value = "";
+		document.querySelector("#validate__name2").value = "";
+		document.querySelector("#nationalites").value = "";
+		document.querySelector(".email__validate").value = "";
+		document.querySelector(".day").value = "1";
+		document.querySelector(".mounth").value = "January";
+		document.querySelector(".year").value = "2023";
+		document.querySelector('input[name="exampleRadios"]:checked').value = "male";
+		document.querySelector("#confirmPasswordInput").value = "";
 	}
 }
 
@@ -260,7 +266,8 @@ function handleResponse() {
 	if (xhr.status != 200) {
 		xhr.open("GET", "json/server-err.json", true); //адрес отрицательного запроса
 		xhr.send(null);
-	} else { //да, это костыль, без понятия почему это работает, но работает
+	} else {
+		//да, это костыль, без понятия почему это работает, но работает
 		let result = JSON.parse(xhr.responseText);
 		showResult(result);
 	}
