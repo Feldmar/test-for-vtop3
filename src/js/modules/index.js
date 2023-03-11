@@ -1,10 +1,18 @@
 "use strict";
-let f = document.querySelector("#nationalites");
+let nationality = document.querySelector("#nationalites");
 let emailInvalid = document.querySelector(".invalid__email");
 const input = document.querySelector("#validate__name");
-const errorDiv = document.getElementById("errorDiv");
-const input2 = document.querySelector("#validate__name2");
-const errorDiv2 = document.getElementById("errorDiv2");
+const errorDiv = document.querySelector("#name_invalid");
+const input2 = document.querySelector("#last-name_invalid");
+const errorDiv2 = document.querySelector("#errorDiv2");
+const day = document.querySelector(".day");
+let mounth = document.querySelector(".mounth");
+const year = document.querySelector(".year");
+const emailInput = document.querySelector(".email__validate");
+const submitButton = document.querySelector(".form__button");
+const passwordInput = document.querySelector("#inputPassword4");
+const confirmPasswordInput = document.querySelector("#confirmPasswordInput");
+const passwordError = document.querySelector("#password-error");
 
 function getNationalities() {
 	//национальности для селекта
@@ -28,10 +36,8 @@ function getNationalities() {
 		return `<option  class="nationality__option" value=${nationality}>${nationality}</option>`;
 	});
 
-	f.innerHTML = nationalitiesOptions.join("");
+	nationality.innerHTML = nationalitiesOptions.join("");
 }
-
-const day = document.querySelector(".day");
 
 function getDay() {
 	//день для селекта
@@ -43,8 +49,6 @@ function getDay() {
 
 	day.innerHTML = dayOptions.join("");
 }
-
-let mounth = document.querySelector(".mounth");
 
 function getMounth() {
 	//месяц для селекта
@@ -70,8 +74,6 @@ function getMounth() {
 	mounth.innerHTML = mounthsOptions.join("");
 }
 
-const year = document.querySelector(".year");
-
 function getYear() {
 	//год для селекта
 	const yearOptions = [];
@@ -88,10 +90,7 @@ function getYear() {
 
 export { getNationalities, getDay, getMounth, getYear }; //экспортируем
 
-const emailInput = document.querySelector(".email__validate");
-const submitButton = document.querySelector(".form__button");
-
-function handleInput() {
+function handleEmail() {
 	const inputValue = this.value.trim();
 
 	if (
@@ -117,11 +116,7 @@ function handleInput() {
 	}
 }
 
-emailInput.addEventListener("input", handleInput);
-
-const passwordInput = document.getElementById("inputPassword4");
-const confirmPasswordInput = document.getElementById("confirmPasswordInput");
-const passwordError = document.getElementById("password-error");
+emailInput.addEventListener("input", handleEmail);
 
 passwordInput.addEventListener("input", validatePassword);
 confirmPasswordInput.addEventListener("input", validatePassword);
@@ -181,7 +176,7 @@ function validatePassword() {
 	passwordInput.classList.remove("invalid");
 }
 
-function validateInput(input, errorDiv, errorMessage, invalidClass) {
+function handleNames(input, errorDiv, errorMessage, invalidClass) {
 	const value = input.value;
 	const regex = /^[a-zA-Z0-9]+$/;
 
@@ -198,7 +193,7 @@ function validateInput(input, errorDiv, errorMessage, invalidClass) {
 
 input.addEventListener("input", () => {
 	//валидация имени
-	validateInput(
+	handleNames(
 		input,
 		errorDiv,
 		"Only letters and numbers are allowed",
@@ -208,7 +203,7 @@ input.addEventListener("input", () => {
 
 input2.addEventListener("input", () => {
 	//валидация фамилии
-	validateInput(
+	handleNames(
 		input2,
 		errorDiv2,
 		"Only letters and numbers are allowed",
@@ -228,7 +223,7 @@ function sendFormData() {
 	const formData = {
 		//собираем значения формы
 		firstName: document.querySelector("#validate__name").value,
-		lastName: document.querySelector("#validate__name2").value,
+		lastName: document.querySelector("#last-name_invalid").value,
 		nationality: document.querySelector("#nationalites").value,
 		email: document.querySelector(".email__validate").value,
 		day: document.querySelector(".day").value,
@@ -249,13 +244,14 @@ function showResult(res) {
 		alert(res.result);
 
 		document.querySelector("#validate__name").value = "";
-		document.querySelector("#validate__name2").value = "";
+		document.querySelector("#last-name_invalid").value = "";
 		document.querySelector("#nationalites").value = "";
 		document.querySelector(".email__validate").value = "";
 		document.querySelector(".day").value = "1";
 		document.querySelector(".mounth").value = "January";
 		document.querySelector(".year").value = "2023";
-		document.querySelector('input[name="exampleRadios"]:checked').value = "male";
+		document.querySelector('input[name="exampleRadios"]:checked').value =
+			"male";
 		document.querySelector("#confirmPasswordInput").value = "";
 	}
 }
