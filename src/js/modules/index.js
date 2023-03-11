@@ -90,15 +90,15 @@ function handleInput() {
 	const inputValue = this.value.trim();
 
 	if (
-		/[^\u0000-\u007F]/.test(inputValue) ||
+		!/^[a-zA-Z0-9._@]+$/.test(inputValue) ||
 		!inputValue.includes("@") || //проверка на наличие собачки
 		!inputValue.includes(".") //проверка на наличие точки
 	) {
 		this.classList.add("invalid");
-		console.log("err");
+		this.classList.remove("valid");
 	} else {
 		this.classList.remove("invalid");
-		console.log("noerr");
+		this.classList.add("valid");
 	}
 
 	// check if any input field has the invalid class
@@ -106,6 +106,8 @@ function handleInput() {
 		submitButton.disabled = true;
 	} else {
 		submitButton.disabled = false;
+
+
 	}
 }
 
@@ -170,7 +172,13 @@ function validatePassword() {
 	// убираем сообщение если все правильно
 	passwordError.innerHTML = "";
 	submitButton.disabled = false;
+	passwordInput.classList.remove("invalid");
 }
+
+
+
+
+
 
 function validateInput(input, errorDiv, errorMessage, invalidClass) {
 	const value = input.value;
@@ -252,9 +260,7 @@ function handleResponse() {
 	if (xhr.status != 200) {
 		xhr.open("GET", "json/server-err.json", true); //адрес отрицательного запроса
 		xhr.send(null);
-		let result = JSON.parse(xhr.responseText);
-		// showResult(result);
-	} else {
+	} else { //да, это костыль, без понятия почему это работает, но работает
 		let result = JSON.parse(xhr.responseText);
 		showResult(result);
 	}
