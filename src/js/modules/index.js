@@ -253,6 +253,7 @@ function showResult(res) {
 		document.querySelector('input[name="exampleRadios"]:checked').value =
 			"male";
 		document.querySelector("#confirmPasswordInput").value = "";
+		document.querySelector("#inputPassword").value = "";
 	}
 }
 
