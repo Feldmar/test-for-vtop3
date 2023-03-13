@@ -14,32 +14,37 @@ const path = {
 console.log(path.root);
 
 export const webpackConfig = (isMode) => ({
-  entry: ['@babel/polyfill', `${path.src}/js/app.js`],
-  mode: isMode ? 'development' : 'production',
-  cache: {
-    type: 'filesystem', // По умолчанию 'memory'
-    cacheDirectory: `${path.root}/.temporary_cache`,
-  },
-  output: {
-    path: `${path.build}/js`,
-    filename: 'app.min.js',
-    publicPath: '/',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-        resolve: {
-          fullySpecified: false,
-        },
-      },
-    ],
-  },
-})
+	entry: ["@babel/polyfill", `${path.src}/js/app.js`],
+	mode: isMode ? "development" : "production",
+	cache: {
+		type: "filesystem", // По умолчанию 'memory'
+		cacheDirectory: `${path.root}/.temporary_cache`,
+	},
+	devServer: {
+		headers: {
+			"Access-Control-Allow-Origin": "*",
+		},
+	},
+	output: {
+		path: `${path.build}/js`,
+		filename: "app.min.js",
+		publicPath: "/",
+	},
+	module: {
+		rules: [
+			{
+				test: /\.m?js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+					options: {
+						presets: ["@babel/preset-env"],
+					},
+				},
+				resolve: {
+					fullySpecified: false,
+				},
+			},
+		],
+	},
+});

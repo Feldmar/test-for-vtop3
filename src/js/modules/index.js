@@ -237,7 +237,13 @@ function sendFormData() {
 	};
 
 	xhr.open("GET", "json/server-ok.json", true); //адрес положительного запроса
-	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.setRequestHeader(
+		"Content-Type",
+		"application/json",
+		"Access-Control-Allow-Origin",
+		"X-Requested-With",
+		"XMLHttpRequest"
+	);
 	xhr.send(JSON.stringify(formData));
 }
 
