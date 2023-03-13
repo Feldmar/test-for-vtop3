@@ -1,0 +1,31 @@
+.replace {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 152px;
+}
+
+.accept {
+	padding-left: 42px;
+	display: flex;
+	gap: 11px;
+	flex-direction: column;
+
+	&__title {
+		font-family: $font-work-sans;
+		font-size: 22px;
+		font-weight: 600;
+		line-height: 26px;
+		letter-spacing: -0.46px;
+		color: #111111;
+		margin: 0;
+	}
+
+	&__subtitle {
+		font-family: $font-work-sans;
+		font-size: 13px;
+		line-height: 15px;
+		color: #000000;
+	}
+}

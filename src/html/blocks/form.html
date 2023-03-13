@@ -5,7 +5,6 @@
 			Use the form below to create your account.
 		</div>
 	</div>
-
 	<form
 		class="form__container"
 		method="get"
@@ -20,11 +19,11 @@
 					class="form__input"
 					value=""
 					id="validate__name"
+					inputmode="latin"
 					required
 				/>
 				<label id="name_invalid"></label>
 			</div>
-
 			<div class="form__last-name">
 				<label class="form__label">Last name</label>
 				<input
@@ -32,23 +31,25 @@
 					class="form__input"
 					id="validate__last-name"
 					value=""
+					inputmode="latin"
 					required
 				/>
 				<label id="last-name_invalid"></label>
 			</div>
-
 			<div class="form__nationality">
 				<label class="form__label">Nationality</label>
 				<select class="form__select" id="nationalites" required></select>
 			</div>
-
 			<div class="form__email">
 				<label class="form__label">Email</label>
-
-				<input type="email" class="email__validate" value="" />
+				<input
+					type="email"
+					class="email__validate"
+					value=""
+					inputmode="latin"
+				/>
 				<label class="invalid__email"></label>
 			</div>
-
 			<div class="form__dob">
 				<label class="form__label">Date of Birth</label>
 				<div class="form__dob__selects">
@@ -57,7 +58,6 @@
 					<select class="form__select year" required></select>
 				</div>
 			</div>
-
 			<div class="form__gender">
 				<label class="form__label">Gender</label>
 				<div class="form__gender__checks">
@@ -88,6 +88,7 @@
 					type="password"
 					class="form__input"
 					id="inputPassword"
+					inputmode="latin"
 					value=""
 				/>
 				<label id="password-error"></label>
@@ -98,11 +99,12 @@
 					type="password"
 					class="form__input"
 					id="confirmPasswordInput"
+					inputmode="latin"
 					value=""
+					maxlength="18"
 				/>
 			</div>
 		</div>
-
 		<div class="form__bottom">
 			<div>
 				<span class="form__bottom__description"

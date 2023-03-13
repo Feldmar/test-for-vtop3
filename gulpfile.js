@@ -15,7 +15,6 @@ import { svgSprive } from './gulp/tasks/svgSprive.js'
 import { zip } from './gulp/tasks/zip.js'
 import { ftp } from './gulp/tasks/ftp.js'
 import { json } from "./gulp/tasks/json.js";
-import { python } from "./gulp/tasks/python.js";
 
 // Передаем значения в глобальную переменную
 global.app = {
@@ -40,7 +39,7 @@ const fonts = gulp.series(otfToTtf, ttfToWoff, fontStyle)
 // Основные задачи
 const mainTasks = gulp.series(
 	fonts,
-	gulp.parallel(copy, html, scss, js, images, python, json)
+	gulp.parallel(copy, html, scss, js, images, json)
 );
 
 // Построение сценариев выполнения задач
@@ -53,4 +52,4 @@ const deployFTP = gulp.series(reset, mainTasks, ftp)
 gulp.task('default', dev)
 
 // Экспорт сценариев
-export { dev, build, deployZIP, deployFTP, svgSprive, json,python }
+export { dev, build, deployZIP, deployFTP, svgSprive, json }

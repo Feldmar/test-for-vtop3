@@ -45,15 +45,15 @@
 	}
 
 	&__button {
-		background: #5a61ed;
-		border: 0.5px solid #ffffff;
+		background: $blue-color;
+		border: 0.5px solid $white-color;
 		padding: 7px 25px;
 		font-family: $font-pt;
 		font-style: normal;
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 18px;
-		color: #ffffff;
+		color: $white-color;
 	}
 
 	&__login {
@@ -70,14 +70,14 @@
 			line-height: 26px;
 			font-weight: 600;
 			letter-spacing: -0.46px;
-			color: #111111;
+			color: $black-color;
 		}
 
 		&__subtitle {
 			font-family: $font-work-sans;
 			font-size: 14px;
 			line-height: 16px;
-			color: #111111;
+			color: $black-color;
 		}
 	}
 
@@ -103,28 +103,28 @@
 
 	&__input {
 		border: unset;
-		border-bottom: 1px solid #f2f2f2;
+		border-bottom: 1px solid $bc-color;
 		border-radius: unset;
 		max-width: 234px;
 		font-family: $font-work-sans;
 		font-size: 14px;
 		line-height: 16px;
-		color: #111111;
+		color: $black-color;
 		padding-bottom: 6px;
 		background: transparent;
 		white-space: nowrap;
-		overflow: hidden;
+		overflow-x: hidden;
 		text-overflow: ellipsis;
 	}
 
 	&__select {
 		border: unset;
-		border-bottom: 1px solid #f2f2f2;
+		border-bottom: 1px solid $bc-color;
 		border-radius: unset;
 		font-family: $font-work-sans;
 		font-size: 14px;
 		line-height: 16px;
-		color: #111111;
+		color: $black-color;
 		appearance: none;
 		padding-bottom: 6px;
 		background: transparent;

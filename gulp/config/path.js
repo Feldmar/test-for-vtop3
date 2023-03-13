@@ -13,7 +13,6 @@ export const path = {
 		images: `${buildFolder}/images/`,
 		fonts: `${buildFolder}/fonts/`,
 		static: `${buildFolder}/static/`,
-		python: `${buildFolder}/python/`,
 		json: `${buildFolder}/json/`,
 	},
 	src: {
@@ -24,11 +23,10 @@ export const path = {
 		html: `${srcFolder}/*.html`,
 		static: `${srcFolder}/static/**/*.*`,
 		svgicons: `${srcFolder}/svgicons/*.svg`,
-		python: `${srcFolder}/python/python.py`,
 		json: `${srcFolder}/json/*.json`,
 	},
 	watch: {
-		js: `${srcFolder}/js/**/*.js`,
+		js: `${srcFolder}/js/**/**.js`,
 		scss: `${srcFolder}/scss/**/*.scss`,
 		html: `${srcFolder}/**/*.html`,
 		images: `${srcFolder}/**/*.{jpg,jpeg,png,svg,gif,webp,ico}`,

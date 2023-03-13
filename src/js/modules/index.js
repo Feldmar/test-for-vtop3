@@ -13,6 +13,7 @@ const submitButton = document.querySelector(".form__button");
 const passwordInput = document.querySelector("#inputPassword");
 const confirmPasswordInput = document.querySelector("#confirmPasswordInput");
 const passwordError = document.querySelector("#password-error");
+const form = document.querySelector(".form");
 
 function getNationalities() {
 	//национальности для селекта
@@ -91,6 +92,7 @@ function getYear() {
 export { getNationalities, getDay, getMounth, getYear }; //экспортируем
 
 function handleEmail() {
+	//функция для валидации имейла
 	const inputValue = this.value.trim();
 
 	if (
@@ -108,7 +110,7 @@ function handleEmail() {
 		emailInvalid.innerHTML = "";
 	}
 
-	// check if any input field has the invalid class
+	// управление кнопкой отправки
 	if (document.querySelector(".invalid")) {
 		submitButton.disabled = true;
 	} else {
@@ -122,6 +124,7 @@ passwordInput.addEventListener("input", validatePassword);
 confirmPasswordInput.addEventListener("input", validatePassword);
 
 function validatePassword() {
+	//функция для валидации пароля
 	const password = passwordInput.value;
 	const confirmPassword = confirmPasswordInput.value;
 
@@ -129,8 +132,7 @@ function validatePassword() {
 	if (password.length < 8) {
 		passwordError.innerHTML = "Password must be at least 8 characters long";
 		passwordInput.classList.add("invalid");
-		submitButton.disabled = true;
-		cancelSend(); // добавляем класс невалидного инпута
+		submitButton.disabled = true; // добавляем класс невалидного инпута
 		return;
 	}
 
@@ -177,6 +179,7 @@ function validatePassword() {
 }
 
 function handleNames(input, errorDiv, errorMessage, invalidClass) {
+	//функция для проверки имени и фамилии
 	const value = input.value;
 	const regex = /^[a-zA-Z0-9]+$/;
 
@@ -234,16 +237,16 @@ function sendFormData() {
 	};
 
 	xhr.open("GET", "json/server-ok.json", true); //адрес положительного запроса
-	xhr.send(formData);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(formData));
 }
 
 function showResult(res) {
-	if (res.result === "err") {
+	if (!res.result === "ok") {
 		animateError();
 	} else {
-		alert(res.result);
-
-		document.querySelector("#validate__name").value = "";
+		replaceContent(); //замена контента
+		document.querySelector("#validate__name").value = ""; //очистка полей формы
 		document.querySelector("#validate__last-name").value = "";
 		document.querySelector("#nationalites").value = "";
 		document.querySelector(".email__validate").value = "";
@@ -264,13 +267,13 @@ function handleResponse() {
 		xhr.open("GET", "json/server-err.json", true); //адрес отрицательного запроса
 		xhr.send(null);
 	} else {
-		//да, это костыль, без понятия почему это работает, но работает
 		let result = JSON.parse(xhr.responseText);
 		showResult(result);
 	}
 }
 
 function animateError() {
+	//анимация ошибки
 	submitButton.animate(
 		[
 			// keyframes
@@ -295,3 +298,21 @@ function animateError() {
 	);
 }
 xhr.onreadystatechange = handleResponse;
+
+function replaceContent() {
+	//замена контента при успешной отправке
+	setTimeout(() => {
+		form.style.backgroundImage = "none";
+		form.innerHTML = `<div class="replace">
+			<div class="accept"> 
+				<h4 class="accept__title">Thank You!</h4>
+				<h5 class="accept__subtitle">you registered!</h5>
+			</div>
+			<div>
+				<span class="form__bottom__description"
+					>Have an account? <a href="#" class="form__login">Login</a></span
+				>
+			</div>
+		</div>`;
+	}, 10000);
+}
